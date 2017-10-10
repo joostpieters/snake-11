@@ -24,7 +24,7 @@ walls = []
 walls.append(wall)                                               # First food co-ordinates
 
 win.addch(food[0], food[1], '*')  
-win.addch(walls[0][0], walls[0][1] '@')                                 # Prints the food
+win.addch(walls[0][0], walls[0][1], '@')                                 # Prints the food
 
 while key != 27:                                                   # While Esc key is not pressed
     win.border(0)
