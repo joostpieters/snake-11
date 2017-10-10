@@ -24,7 +24,7 @@ walls = []
 walls.append(wall)                                               # First food co-ordinates
 
 win.addch(food[0], food[1], '*')  
-win.addch(wall[0][0], wall[0][1] '@')                                 # Prints the food
+win.addch(walls[0][0], walls[0][1] '@')                                 # Prints the food
 
 while key != 27:                                                   # While Esc key is not pressed
     win.border(0)
@@ -52,7 +52,7 @@ while key != 27:                                                   # While Esc k
     snake.insert(0, [snake[0][0] + (key == KEY_DOWN and 1) + (key == KEY_UP and -1), snake[0][1] + (key == KEY_LEFT and -1) + (key == KEY_RIGHT and 1)])
 
     # If snake crosses the boundaries, make it enter from the other side
-    if snake[0][0] == : snake[0][0] = 18
+    if snake[0][0] == 0: snake[0][0] = 18
     if snake[0][1] == 0: snake[0][1] = 58
     if snake[0][0] == 19: snake[0][0] = 1
     if snake[0][1] == 59: snake[0][1] = 1
@@ -70,7 +70,7 @@ while key != 27:                                                   # While Esc k
         while food == []:
             food = [randint(1, 18), randint(1, 58)]  
             wall = [randint(1, 18), randint(1, 58)]
-            walls.append(wall)               # Calculating next food's coordinates
+            walls.append(wall)                                      # Calculating next food's coordinates
             if food in snake: food = []
             if wall in snake: wall = []
         win.addch(food[0], food[1], '*')
