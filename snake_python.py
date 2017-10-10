@@ -24,7 +24,15 @@ walls = []
 walls.append(wall)                                               # First food co-ordinates
 
 win.addch(food[0], food[1], '*')  
-win.addch(walls[0][0], walls[0][1], '@')                                 # Prints the food
+win.addch(walls[0][0], walls[0][1], '@')  
+
+# Displays the game over message
+def gameOver(message):
+
+    while key != 27:
+        key = -1
+        win.addstr(10, 2, message)
+    break
 
 while key != 27:                                                   # While Esc key is not pressed
     win.border(0)
@@ -61,8 +69,11 @@ while key != 27:                                                   # While Esc k
     #if snake[0][0] == 0 or snake[0][0] == 19 or snake[0][1] == 0 or snake[0][1] == 59: break
 
     # If snake runs over itself
-    if snake[0] in snake[1:]: break
-    if snake[0] in walls: break
+    if snake[0] in snake[1:]: gameOver("TSS TSS...SHAME ON YOU")
+
+    # If snake runs into a wall
+    if snake[0] in walls: gameOver("GAME OVER YOU PATHETIC LOSER")
+
     
     if snake[0] == food:                                            # When snake eats the food
         food = []
