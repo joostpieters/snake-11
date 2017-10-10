@@ -18,8 +18,10 @@ key = KEY_RIGHT                                                    # Initializin
 score = 0
 
 snake = [[4,10], [4,9], [4,8]]                                     # Initial snake co-ordinates
-food  = [10,20]    
-walls  = [[15, 8]]                                                 # First food co-ordinates
+food  = [10,20] 
+wall  = [15, 18]
+walls = []  
+walls.append(wall)                                               # First food co-ordinates
 
 win.addch(food[0], food[1], '*')  
 win.addch(wall[0][0], wall[0][1] '@')                                 # Prints the food
@@ -60,23 +62,24 @@ while key != 27:                                                   # While Esc k
 
     # If snake runs over itself
     if snake[0] in snake[1:]: break
-
+    if snake[0] in walls: break
     
     if snake[0] == food:                                            # When snake eats the food
         food = []
-        wall = [randit(1, 18), randit(1, 58)]
-        walls.append(wall)
         score += 1
         while food == []:
-            food = [randint(1, 18), randint(1, 58)]                 # Calculating next food's coordinates
+            food = [randint(1, 18), randint(1, 58)]  
+            wall = [randint(1, 18), randint(1, 58)]
+            walls.append(wall)               # Calculating next food's coordinates
             if food in snake: food = []
+            if wall in snake: wall = []
         win.addch(food[0], food[1], '*')
+        win.addch(wall[0], wall[1], '@')
     else:    
         last = snake.pop()                                          # [1] If it does not eat the food, length decreases
         win.addch(last[0], last[1], ' ')
     win.addch(snake[0][0], snake[0][1], '#')
 
-    if snake[0] in walls: break 
     
 curses.endwin()
 print("\nScore - " + str(score))
